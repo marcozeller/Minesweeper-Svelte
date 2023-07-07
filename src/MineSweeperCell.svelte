@@ -6,26 +6,23 @@
     };
 </script>
 
-<div class="cell">
-    <button on:click={clicked_on}>
-        {#if state == "hidden"}
-            unknown
-        {:else if state == "flagged"}
-            flag
-        {:else}
-            {content}
-        {/if}
-    </button>
-</div>
+{#if state == "hidden"}
+    <div class="cell hidden" on:click={clicked_on} />
+{:else if state == "flagged"}
+    <div class="cell flagged" on:click={clicked_on}>?</div>
+{:else}
+    <div class="cell open">{content}</div>
+{/if}
 
 <style>
     .cell {
         height: 80px;
         width: 80px;
-        background-image: url("covered.png");
     }
-    .button {
-        height: 80px;
-        width: 80px;
+    .flagged {
+    }
+    .hidden {
+        background-image: url("http://i47.tinypic.com/2ni0ahd.png");
+        background-size: cover;
     }
 </style>
