@@ -16,12 +16,21 @@
       dispatch("zero_uncovered", { x: x, y: y });
     }
   };
+  const onRightClick = () => {
+    if (state == "flagged") {
+      state = "hidden";
+      return;
+    } else if (state == "hidden") {
+      state = "flagged";
+      return;
+    } 
+  }
 </script>
 
 {#if state == "hidden"}
-  <div class="cell hidden center" on:click={clicked_on} />
+  <div class="cell hidden center" on:click={clicked_on} on:contextmenu|preventDefault={onRightClick} />
 {:else if state == "flagged"}
-  <div class="cell flagged center" on:click={clicked_on}>
+  <div class="cell flagged center" on:click={clicked_on} on:contextmenu|preventDefault={onRightClick} >
     <p>?</p>
   </div>
 {:else}
